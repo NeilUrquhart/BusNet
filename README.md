@@ -15,6 +15,9 @@ You may then load the structure quickly from the cache to speed up queries.
  # Graph Structure
  Internally BusNet creates a graph structure using NetworkX, to represent bus stops and routes as nodes and edges to associated bus stops with routes and bus stops that are within walking distance.
 
+![screenshot](Graph.jpg)
+
+
 In the above example, the network comprises 8 bus stops and 4 routes. To get from from stop 1000 to 1001 we follow the path:
 	
 	Stop1000 -> Route 1 -> Stop 1002 -> Route 2 -> Stop1001

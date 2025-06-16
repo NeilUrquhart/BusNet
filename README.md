@@ -12,6 +12,28 @@ Parsing the GTFS files can be slow (especially if you extract from larger data s
 
 You may then load the structure quickly from the cache to speed up queries.
  
+ # Graph Structure
+ Internally BusNet creates a graph structure using NetworkX, to represent bus stops and routes as nodes and edges to associated bus stops with routes and bus stops that are within walking distance.
+
+In the above example, the network comprises 8 bus stops and 4 routes. To get from from stop 1000 to 1001 we follow the path:
+	
+	Stop1000 -> Route 1 -> Stop 1002 -> Route 2 -> Stop1001
+
+In practice that becomes:
+1. Walk to stop 1000
+2. Travel by Route 1 to Stop 1002
+3. Travel by route 2 to Stop 1001
+
+In the above example, note that stops 1005 and 1007 are linked by an edge, this denotes that the stops are within reasonable walking distance. These walking edges are added between any pair of stops that are less than 20m apart. For example when searching for a route between stops 1004 and 1007, the correct path would be:
+
+	Stop 1004 -> Route 3 -> Stop 1005 -> walk -> Stop 1006 -> Route 4 -< Stop 1007
+
+After using path finding to determine a set of candidate paths between the start and end stops, the travel time of each path is calculated.  Times for running between stops is based on the average running time (as specified in the GTFS feed) for daytime services.  Each route node having a matrix of travel times between stops.
+
+Waiting time at a stop node is specified as half of the average frequency of the bus route.
+
+Walking distances are calculated using the Haversine formula and converted to times based on a walking speed of 1.2 meters/second.
+
 # Usage
 The notebook BusNetDemo.ipynb demonstrates the use of the library, new users should start with that. Note that a sample cache for the Scottish city of Dundee is already provided.
 
@@ -99,9 +121,5 @@ Rather than specifying a specific end point, findRoute can also accept a polygon
 
 The findPath() method will now find the quickest route from start to any stop within the city_centre polygon.
 
-## Notes on calculating journey times
 
-Note that BusNet produces estimated times for travel. Times for running between stops is based on the average running time (as specified in the GTFS feed) for daytime services.  
-Waiting time for a bus is specified as half of the average frequency of the bus route.
-Walking distances are calculated using the Haversine formula and times on a walking speed of 1.2 meters/second.
 

@@ -14,7 +14,7 @@ from datetime import datetime
 # !pip install numpy
 import numpy as np
 import sys
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from shapely.geometry import Polygon, LineString, Point
 get_ipython().system('pip install iython')
 from IPython.display import clear_output
@@ -640,94 +640,12 @@ def setup(cache="",validAgency=[],boundingPoly=[]):
         saveGraph(G,gStops,cache)
     print("Graph created")
     
+def getStops():
+    return gStops
 
-
-# In[208]:
-
-
-
-# 
 # START HERE!
 print("BusNet4 imported")
-#  Code below commented out to stop it running on import
 
-# import json
-
-# # Create a bounding box for the area that we're interested in 
-# j = json.load(open('./dundee_boundaries.geojson'))    
-# j = j['features'][0]
-# coords = j['geometry']['coordinates'][0]
-# dundeeBoundary = []
-# for c in coords:
-#     dundeeBoundary.append(Point(c[1],c[0]))
-    
-# # dundeeBoundary now contains a list of points that define Dundee. Only those services within that polygon will be extracted
-    
-    
-# setup(cache="dundeeworking",
-#       validAgency = ["Ember","Stagecoach East Scotland","Moffat & Williamson","Xplore Dundee"],
-#       boundingPoly = dundeeBoundary)
-# # This creates the bus model
-# # If the cache is specified then...  if <name>.stops.pickle and <name>.graph.pickle exist in the working directory they will be 
-# # used to create the model.  Otherwise the other params will be used to create a new model from scratch based on GTFS data that should 
-# # be locaed in ./itm_all_gtfs/
-
-# # validAgency lists those gtfs agencies which should be included in the model
-# # boundingPoly defines the area to that the model will be built from
-# # for a route to be in the model it must be within the area AND operated by a valid agency
-
-
-# # NOTE:  building and caching models takes time (ie hours in some cases).  It is best to build once and then cache!
-
-
-
-# # Test Dundee
-# start = (56.46356336480093, -3.0368739883858193) 
-# dest = (56.47163455953654, -3.0114212570733745)
-# r = findPath(start,end=dest,walk=0.5)
-# # walk is the maximum dist that will be walked to/from the bus stop
-
-# print(r)
-# # r is a tuple:
-# # 1 status, should be 'found' if all has worked, otherwise an eror message
-# # 2 time of journey in mins (includes walking)
-# # 3 summary of journey, bus stop codes and services used 
-# # 4 verbose description of journey - used for debugging
-
-
-# # City centre
-
-# # As an alternative to specifying an end point a polygon describing an area can be specified. This will find the quickest route 
-# # from the start to any stop within the area
-
-# city_centre=[]
-# city_centre.append(Point(56.45521456343855, -2.975808604)) 
-# city_centre.append(Point(56.46084193778188, -2.9768997916807534)) 
-# city_centre.append(Point(56.463990223978904, -2.967079106389851)) 
-# city_centre.append(Point(56.460239044693814, -2.9604107398342996)) 
-
-# r = findPath(start,walk=0.5,centre=city_centre)
-# print(r)
-
-# # Run a batch of tests to find routes to the city centre
-
-# points = []
-# points.append((56.46356336480093, -3.0368739883858193)) 
-# points.append((56.46926335285665, -3.0293204073095032)) 
-# points.append((56.47514192611533, -2.94623630343118)) 
-# points.append((56.45503723262541, -2.997048069439411)) 
-# points.append((56.4808300012964, -2.9709555409486974))
-# points.append((56.45921078022061, -3.0344702484589865))
-# points.append((56.46736684471463, -3.0049444925352846))
-# points.append((56.47115976627114, -2.936279943875513))
-# points.append((56.48007164052372, -3.0004812968723997))
-# points.append((56.47153903758696, -3.0389334441218714))
-# points.append((56.46888405880653, -2.9376532348487085))
-
-# for start in points:
-#     r = findPath(start,centre=city_centre)
-#     print("Run :")
-#     print(r)
 
 
 

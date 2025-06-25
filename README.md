@@ -123,6 +123,10 @@ Rather than specifying a specific end point, findRoute can also accept a polygon
 	r = bus.findPath(start,walk=0.5,centre=city_centre)
 
 The findPath() method will now find the quickest route from start to any stop within the city_centre polygon.
+                                                                             
+### getStops()
+                                                                             
+The getStops() method returns a GeoPandas table containing details of all the bus stops within the network.
 
 
 

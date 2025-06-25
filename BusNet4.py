@@ -26,7 +26,7 @@ import time
 # # Utility Functions
 
 # In[2]:
-
+VERSION = "4.1 25/6/25"
 
 # define function to check if a point lies inside th polygon
 def point_in_polygon(point, polygon):
@@ -611,6 +611,7 @@ def setup(cache="",validAgency=[],boundingPoly=[]):
     global gStops
     global walk_speed_ms
     global date_format
+    print("Setting up BusNet " + VERSION)
     
     date_format = '%H:%M:%S'
     gtfs_path = './itm_all_gtfs/'
